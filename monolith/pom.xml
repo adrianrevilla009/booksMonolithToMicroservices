@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>es.codeurjc.mca</groupId>
-	<artifactId>practica2.1.2-books</artifactId>
+	<artifactId>monolith</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<parent>
