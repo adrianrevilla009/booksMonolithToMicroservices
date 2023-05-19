@@ -11,11 +11,11 @@ import org.springframework.context.annotation.Bean;
 import java.util.logging.Logger;
 
 @SpringBootApplication
-public class Application {
-	private static final Logger LOGGER = Logger.getLogger( Application.class.getName() );
+public class MonolithApplication {
+	private static final Logger LOGGER = Logger.getLogger( MonolithApplication.class.getName() );
 
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(MonolithApplication.class, args);
 	}
 
 	@Bean(name = "architectureModel")

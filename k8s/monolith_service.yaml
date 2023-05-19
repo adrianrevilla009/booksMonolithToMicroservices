@@ -1,0 +1,44 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: monolith-service
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: monolith-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: monolith-service
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: monolith-service
+          image: adrian2606/monolith-service:latest
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: admin
+            - name: MYSQL_DATABASE
+              value: books
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: monolith-service
+  labels:
+    app: monolith-service
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      name: monolith-service-port
+  selector:
+    app: monolith-service
+  type: ClusterIP

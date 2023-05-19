@@ -1,15 +1,15 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql
+  name: mysql-monolith
 spec:
   selector:
     matchLabels:
-      app: mysql
+      app: mysql-monolith
   template:
     metadata:
       labels:
-        app: mysql
+        app: mysql-monolith
     spec:
       containers:
         - name: mysql
@@ -18,16 +18,16 @@ spec:
             - name: MYSQL_ROOT_PASSWORD
               value: password
             - name: MYSQL_DATABASE
-              value: eoloplantsDB
+              value: books
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql
+  name: mysql-monolith
 spec:
   type: ClusterIP
   selector:
-    app: mysql
+    app: mysql-monolith
   ports:
     - port: 3306
