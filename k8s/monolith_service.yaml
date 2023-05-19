@@ -18,7 +18,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: monolith-service
-          image: adrian2606/monolith-service:latest
+          image: adrian2606/monolith-service:v1
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: admin

@@ -18,7 +18,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: microservice-service
-          image: adrian2606/microservice-service:latest
+          image: adrian2606/microservice-service:v1
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: admin
