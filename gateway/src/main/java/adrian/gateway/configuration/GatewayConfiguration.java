@@ -14,17 +14,23 @@ public class GatewayConfiguration {
     @Value("${app.model}")
     private String model;
 
+    @Value("${service.monolith}")
+    private String monolithUrl;
+
+    @Value("${service.microservice}")
+    private String microserviceUrl;
+
     @Bean
     public RouteLocator gatewayRoutes(RouteLocatorBuilder builder) {
         if (this.model.equals(MODEL_MICROSERVICE)) {
             return builder.routes()
                     .route(r -> r.path("/users/**")
-                            .uri("http://localhost:8081/"))
+                            .uri(this.microserviceUrl))
                     .build();
         }
         return builder.routes()
                 .route(r -> r.path("/users/**")
-                        .uri("http://localhost:8080/"))
+                        .uri(this.monolithUrl))
                 .build();
     }
 

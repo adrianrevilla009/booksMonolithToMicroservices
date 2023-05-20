@@ -18,12 +18,14 @@ spec:
       restartPolicy: Always
       containers:
         - name: microservice-service
-          image: adrian2606/microservice-service:v1
+          image: adrian2606/microservice-service:v3
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: admin
             - name: MYSQL_DATABASE
               value: users
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://mysql-microservice:3306/users
           ports:
             - containerPort: 8081
 ---
@@ -41,4 +43,4 @@ spec:
       name: microservice-service-port
   selector:
     app: microservice-service
-  type: ClusterIP
+  type: NodePort

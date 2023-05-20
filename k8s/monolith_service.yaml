@@ -18,12 +18,16 @@ spec:
       restartPolicy: Always
       containers:
         - name: monolith-service
-          image: adrian2606/monolith-service:v1
+          image: adrian2606/monolith-service:v3
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: admin
             - name: MYSQL_DATABASE
               value: books
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://mysql-monolith:3306/books
+            - name: APP_MODEL
+              value: monolith
           ports:
             - containerPort: 8080
 ---
@@ -41,4 +45,4 @@ spec:
       name: monolith-service-port
   selector:
     app: monolith-service
-  type: ClusterIP
+  type: NodePort
