@@ -1,6 +1,8 @@
 package es.codeurjc.books.utils;
 
 import es.codeurjc.books.model.User;
+import es.codeurjc.books.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
@@ -12,12 +14,11 @@ public class MicroserviceModel implements ArchitectureModel {
     @Value("${server.microserviceHost}")
     private String microserviceHost;
 
+    @Autowired
+    private UserService userService;
 
     private User getUser(long id) {
-        final String uri = this.microserviceHost + "/users/" + id;
-
-        RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForObject(uri, User.class);
+        return this.userService.findById(id).orElseThrow();
     }
 
     @Override
