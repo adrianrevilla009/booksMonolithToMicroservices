@@ -12,16 +12,19 @@ public class GatewayConfiguration {
     private static String MODEL_MICROSERVICE = "microservice";
 
     @Value("${app.model}")
-    private String model;
+    private String model; // monolith
 
     @Value("${service.monolith}")
-    private String monolithUrl;
+    private String monolithUrl; // http://localhost:8080/
 
     @Value("${service.microservice}")
-    private String microserviceUrl;
+    private String microserviceUrl; // http://localhost:8081/
 
     @Bean
     public RouteLocator gatewayRoutes(RouteLocatorBuilder builder) {
+        System.out.println("microservice " + this.microserviceUrl);
+        System.out.println("monolith " + this.monolithUrl);
+        System.out.println("model " + this.model);
         if (this.model.equals(MODEL_MICROSERVICE)) {
             return builder.routes()
                     .route(r -> r.path("/users/**")

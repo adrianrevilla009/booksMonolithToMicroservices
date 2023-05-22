@@ -22,8 +22,10 @@ spec:
           env:
             - name: APP_MODEL
               value: monolith
-            #name SERVICE_MONOLITH = http://localhost:8080/
-            #name SERVICE_MICROSERVICE = http://localhost:8081/
+            - name: SERVICE_MONOLITH
+              value: http://monolith-service:8080/
+            - name: SERVICE_MICROSERVICE
+              value: http://microservice-service:8081/
           ports:
             - containerPort: 8082
 ---
