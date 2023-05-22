@@ -18,7 +18,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: gateway-service
-          image: adrian2606/gateway-service:v3
+          image: adrian2606/gateway-service:v4
           env:
             - name: APP_MODEL
               value: monolith

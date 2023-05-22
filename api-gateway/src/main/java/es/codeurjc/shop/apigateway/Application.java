@@ -1,13 +1,18 @@
-package adrian.gateway.configuration;
+package es.codeurjc.shop.apigateway;
+
+import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.web.reactive.function.client.WebClient;
 
-@Configuration
-public class GatewayConfiguration {
+@SpringBootApplication
+public class Application {
+
     private static String MODEL_MONOLITH = "monolith";
     private static String MODEL_MICROSERVICE = "microservice";
 
@@ -19,6 +24,10 @@ public class GatewayConfiguration {
 
     @Value("${service.microservice}")
     private String microserviceUrl; // http://localhost:8081/
+	
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
 
     @Bean
     public RouteLocator gatewayRoutes(RouteLocatorBuilder builder) {
@@ -37,4 +46,8 @@ public class GatewayConfiguration {
                 .build();
     }
 
+    @Bean
+    public WebClient.Builder webClient(){
+        return WebClient.builder();
+    }
 }
